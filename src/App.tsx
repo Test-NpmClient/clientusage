@@ -1,11 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import {TodoItemsClient, CreateTodoItemCommand} from '@testnpmclient/api-npm-client';
+import axios from 'axios';
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const client = new TodoItemsClient("https://test.com",axios);
+  useEffect(() => {
+    client.createTodoItem({title: "rfrf", listId: 2} as CreateTodoItemCommand).then((res) => {
+      console.log(res);
+    });
+  }, []);
   return (
     <>
       <div>
